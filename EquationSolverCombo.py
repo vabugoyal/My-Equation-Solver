@@ -471,35 +471,41 @@ def knock_down_the_system():
         print("1. The dimension of row space:", local_rank)
         print("2. The row space of the following matrix is:")
         print("   * ", end="")
-        row_basis = [given_matrix[i] for i in range(local_rank)]
-        indp = [f"a{i+1}" for i in range(len(row_basis))]
-        rhs_ls = [f"{indp[i]}{beautiful_row(row_basis[i])} + " for i in range(len(row_basis)-1)]
-        for i in rhs_ls:
-            print(i, end="")
-        print(f"{indp[-1]}{beautiful_row(row_basis[-1])}")
-        print("   ", end="")
-        print("Here a{i} belongs to R.")
+        if not local_rank:
+            print("{0}")
+        else:
+            row_basis = [given_matrix[i] for i in range(local_rank)]
+            indp = [f"a{i+1}" for i in range(len(row_basis))]
+            rhs_ls = [f"{indp[i]}{beautiful_row(row_basis[i])} + " for i in range(len(row_basis)-1)]
+            for i in rhs_ls:
+                print(i, end="")
+            print(f"{indp[-1]}{beautiful_row(row_basis[-1])}")
+            print("   ", end="")
+            print("Here a{i} belongs to R.")
         print("-----------------------------------------------------------------------------------------")
 
     #    printing the column space of the given matrix
         print("1. The dimension of column space:", local_rank)
         print("2. The column space of the following matrix is:")
         print("   * ", end="")
-        col_basis = []
-        for i in pivot_col:
-            temp = []
-            for j in range(n):
-                element = initial_matrix[j][i]
-                temp.append(element)
-            col_basis.append(temp)
+        if not local_rank:
+            print("{0}")
+        else:
+            col_basis = []
+            for i in pivot_col:
+                temp = []
+                for j in range(n):
+                    element = initial_matrix[j][i]
+                    temp.append(element)
+                col_basis.append(temp)
 
-        indp = [f"b{i+1}" for i in range(len(col_basis))]
-        rhs_ls = [f"{indp[i]}{beautiful_row(col_basis[i])} + " for i in range(len(col_basis)-1)]
-        for i in rhs_ls:
-            print(i, end="")
-        print(f"{indp[-1]}{beautiful_row(col_basis[-1])}")
-        print("   ", end="")
-        print("Here b{i} belongs to R.")
+            indp = [f"b{i+1}" for i in range(len(col_basis))]
+            rhs_ls = [f"{indp[i]}{beautiful_row(col_basis[i])} + " for i in range(len(col_basis)-1)]
+            for i in rhs_ls:
+                print(i, end="")
+            print(f"{indp[-1]}{beautiful_row(col_basis[-1])}")
+            print("   ", end="")
+            print("Here b{i} belongs to R.")
         print("-----------------------------------------------------------------------------------------")
 
     #   printing the left nullspace of the given matrix
