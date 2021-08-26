@@ -7,4 +7,4 @@ This is an awesome equation solver!
 ### c) Leftnull Space
 ### d) Null space
 
-# BONUS: You can get the best solution your system in case when there is no solution.
+## BONUS: You can get the best solution your system in case when there is no solution.
