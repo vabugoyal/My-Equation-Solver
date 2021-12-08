@@ -9,4 +9,4 @@ This is an awesome equation solver! By just providing the augmented matrix of th
 
 ## BONUS: You can get the best solution your system in case when there is no solution.
 
-## Don't miss running the "EquationSolverCombo.py" file :)
+## Don't miss running the "EquationSolverCombo.py" file
