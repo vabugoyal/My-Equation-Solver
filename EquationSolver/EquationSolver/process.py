@@ -33,13 +33,10 @@ def processMatrix(request):
     if len(givenMatrix) != rows: return "Invalid Matrix"
     print(givenMatrix)
 
-    Solver.knock_down_the_system(givenMatrix, 'a')
+    ans = Solver.knock_down_the_system(givenMatrix, 'a')
 
     # now read the data from solution file
-    ans = ""
-    with open("solution", "r") as f:
-        for line in f:
-            ans += "<pre>" + line + "</pre>"
+    ans = "<pre>" + ans + "</pre>"
     return ans
 
 

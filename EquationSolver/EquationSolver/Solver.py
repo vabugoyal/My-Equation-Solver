@@ -2,6 +2,7 @@
 import time
 from fractions import Fraction
 import copy
+from io import StringIO  # Python3 use: from io import StringIO
 import sys
 
 
@@ -101,10 +102,15 @@ def inverse_matrix(given_matrix):
     return diagonal_matrix
 
 
-def knock_down_the_system(given_matrix, typ):
-    print("function called")
-    sys.stdout = open('solution', 'w')
 
+def knock_down_the_system(given_matrix, typ):
+    import sys
+    old_stdout = sys.stdout
+    sys.stdout = mystdout = StringIO()
+
+
+
+    # examine mystdout.getvalue()
     max_length = 0
     save_repetition = []
     n = len(given_matrix)
@@ -497,8 +503,8 @@ def knock_down_the_system(given_matrix, typ):
                 #     print(projection[-1][0], end=" ")
                 #     print(")")
 
-                sys.stdout.close()
-                return
+                sys.stdout = old_stdout
+                return mystdout.getvalue()
 #   when the rows>=columns(unknowns)
     if typ == 'a' and n >= n1-1:
             if n1-1 == rank: # there is definitely trivial solution
@@ -705,5 +711,5 @@ def knock_down_the_system(given_matrix, typ):
             print(i, end = "")
         print()
 
-    print("function ended")
-    sys.stdout.close()
+    sys.stdout = old_stdout
+    return mystdout.getvalue()
