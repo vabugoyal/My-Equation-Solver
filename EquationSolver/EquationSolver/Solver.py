@@ -705,4 +705,5 @@ def knock_down_the_system(given_matrix, typ):
             print(i, end = "")
         print()
 
+    print("function ended")
     sys.stdout.close()

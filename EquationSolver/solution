@@ -37,3 +37,4 @@ The row-reduced echelon form and the corresponding E matrix to the given matrix:
 The rank of the matrix is: 2
 The solution space of the given matrix is the vector: (3.0, 2.0)
 This is the trivial solution.
+function ended
