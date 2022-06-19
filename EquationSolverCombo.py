@@ -97,6 +97,8 @@ def inverse_matrix(given_matrix):
     return diagonal_matrix
 
 
+
+
 def knock_down_the_system():
     max_length = 0
     save_repetition = []
