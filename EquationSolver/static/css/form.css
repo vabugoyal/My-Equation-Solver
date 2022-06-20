@@ -1,42 +1,5 @@
-            body {
-                padding: 0;
-                margin: 0
-            }
-            * {
-                box-sizing: border-box;
-            }
-            input, textarea {
-                outline: none;
-            }
-            h1 {
-                margin-top: 0;
-                font-weight: 500;
-            }
-
-            /*row and column structure*/
-            .row {
-                display: flex;
-            }
-            .column {
-                flex: 50%;
-            }
-
-            /*hero section*/
-            #heroMessage {
-                color: white;
-                font-family: 'Dosis', sans-serif;
-                padding: 10% 30%;
-                font-size: 4rem;
-
-            }
-             #hero {
-                background-color: #44acaa;
-                height: 600px;
-             }
-
-
             /*beautiful form css*/
-            form {
+            .myform {
             position: relative;
             width: 80%;
             border-radius: 30px;
@@ -49,7 +12,7 @@
             width: 50px;
             height: 20px;
             border-radius: 20px;
-            background: #e89f1f;
+            background: rgba(232, 159, 31, 0.99);
             }
             .form-left-decoration {
             bottom: 60px;
@@ -110,7 +73,7 @@
             .form-inner textarea {
             resize: none;
             }
-            button {
+            .mybutton {
             width: 100%;
             padding: 10px;
             margin-top: 20px;
@@ -126,7 +89,6 @@
             background: #c98a23;
             }
 
-             /*managing form*/
-            #matrixInput {
-                padding: 12% 5%;
+            #form-heading {
+                color: #44ACAAFF;
             }
