@@ -1,12 +1,16 @@
 # My-Equation-Solver
-This is an awesome equation solver! By just providing the augmented matrix of the system you want to solve you can easily the get the stepwise solution printed. It will give you each and every row operation, etc.
-## You can solve a Matrix system of any order in no time.
-## Gives you the analysis of:  
-### a) Row Space
-### b) Column Space
-### c) Leftnull Space
-### d) Null space
+This is an equation solver created by me from scratch. 
+This uses Gaussian Elimination to find the solution to a 
+system of equations.
+You can get the solution to a system of equation which has 
+1. Unique Solution
+2. No Solution
+3. Infinite Solutions
 
-## BONUS: You can get the best solution your system in case when there is no solution.
+Along with that, you can get the 
+rank of the augmented matrix of teh 
+system and basis, pointing vector, etc.
 
-## Don't miss running the "EquationSolverCombo.py" file
+
+
+
