@@ -1,48 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@800&family=Fascinate&display=swap" rel="stylesheet">
-        <title>Equation Solver</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        {% load static %}
-        <link rel="stylesheet" href="{%static 'css/answer.css'%}">
-    </head>
-    <body>
-    <div class="row" id="hero">
-        <div class="column">
-            <h1 id="heroMessage">Solve system of linear equations in no time.</h1>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Gaussian Eliminator</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+
+  <!-- Google Fonts -->
+  <!-- 1. Ubuntu -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <!-- 2. Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet">
+  <!--  MyFont-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@800&family=Fascinate&display=swap" rel="stylesheet">
+
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/d0b66b11a8.js" crossorigin="anonymous"></script>
+
+  {%load static%}
+  <!-- My CSS file -->
+  <link rel="stylesheet" href="{%static 'css/form.css'%}">
+  <link rel="stylesheet" href="{%static 'css/styles.css'%}">
+
+</head>
+
+<body>
+
+  <section id="title" class="colored-section">
+    <div class="container-fluid">
+      <!-- Title -->
+      <div class="row">
+        <div class="col-lg-6">
+          <h1 id="message" class="big-heading">Solve <br> system of <br>linear equations<br> in <br>no time.</h1>
         </div>
-        <div class="column">
-            <div id="matrixInput">
-                <form action="/solve" method="get" class="decor">
-                    <div class="form-left-decoration"></div>
-                    <div class="form-right-decoration"></div>
-                    <div class="circle"></div>
-                    <div class="form-inner">
-                    <h1>System Data</h1>
-                    <input type="number" placeholder="Number of rows" name="rows">
-                    <input type="number" placeholder="Number of columns" name="cols">
-                    <textarea placeholder="Augmented matrix..." rows="5" name="givenMatrix"></textarea>
-                    <button type="submit">Solve</button>
-                  </div>
-                </form>
+        <div class="col-lg-6 shrink">
+        <div>
+          <form action="/solve" method="get" class="decor myform">
+            <div class="form-left-decoration"></div>
+            <div class="form-right-decoration"></div>
+            <div class="circle"></div>
+            <div class="form-inner">
+            <h1 id="form-heading">System Data</h1>
+            <input type="number" placeholder="Number of rows" name="rows">
+            <input type="number" placeholder="Number of columns" name="cols">
+            <textarea placeholder="Augmented matrix..." rows="5" name="givenMatrix"></textarea>
+            <button type="submit" class="mybutton">Solve</button>
             </div>
+          </form>
+
         </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+
+  <section id="features" class="white-section">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-lg-4 feature">
+          <i class="fas fa-check-circle feature-symbol"></i>
+          <h3>Easy to use.</h3>
+          <p>You just need to give augmented matrix for you system.</p>
+        </div>
+
+        <div class="col-lg-4 feature">
+          <i class="fas fa-bullseye feature-symbol"></i>
+          <h3>Detailed Solution</h3>
+          <p>Gives complete analysis of system of equations.</p>
+        </div>
+
+        <div class="col-lg-4 feature">
+          <i class="fas fa-heart feature-symbol"></i>
+          <h3>Guaranteed to work.</h3>
+          <p>Intense testing done before.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- Examples -->
+
+  <section id="testimonials" class="colored-section">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active container-fluid">
+          <h2 class="testimonial-text">Get the system you want to solve.</h2>
+          <div>
+            <pre class="equations">
+
+x + y - z = 0
+2x + 4y - 2z = 6
+3x + 6y - 3z = 9
+            </pre>
+          </div>
+        </div>
+
+        <div class="carousel-item container-fluid">
+          <h2 class="testimonial-text">Make Augmented Matrix</h2>
+            <div>
+            <pre class="equations">
+
+1     1    -1   0
+2   4  -2   6
+3   6  -3   9
+            </pre>
+          </div>
+        </div>
+
+        <div class="carousel-item container-fluid">
+          <h2 class="testimonial-text">Put it in the solver</h2>
+          <img height="376" src="{%static 'images/solver.png'%}" alt="dog-profile" class="testimonial-img">
+        </div>
+
+        <div class="carousel-item container-fluid">
+          <h2 class="testimonial-text">Get the solution</h2>
+          <img height="376" src="{%static 'images/solution.png'%}" alt="dog-profile" class="testimonial-img">
+        </div>
+
+
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </a>
     </div>
 
 
+  </section>
 
 
-    <div class="footer"></div>
 
 
+  <footer id="footer" class="white-section">
+    <div class="container-fluid">
+      <p>Thanks for visiting.</p>
+    </div>
+  </footer>
 
-<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
-    </body>
+</body>
+
 </html>

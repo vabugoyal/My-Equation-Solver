@@ -5,7 +5,7 @@ from . import process
 
 
 def index(request):
-    return render(request, 'index2.html')
+    return render(request, 'index.html')
 
 
 def solve(request):
