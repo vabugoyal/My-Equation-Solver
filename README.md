@@ -8,9 +8,11 @@ You can get the solution to a system of equation which has
 3. Infinite Solutions
 
 Along with that, you can get the 
-rank of the augmented matrix of teh 
+rank of the augmented matrix of the 
 system and basis, pointing vector, etc.
 
+<img width="473" alt="solver" src="https://user-images.githubusercontent.com/89004991/174587662-9fac9d0f-bed2-45f5-835e-29a8797d7b96.png">
+<img width="877" alt="solution" src="https://user-images.githubusercontent.com/89004991/174587676-7be92c7e-c0eb-4b04-917d-0b6c4a5d6771.png">
 
 
 
