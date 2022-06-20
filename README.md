@@ -11,9 +11,16 @@ Along with that, you can get the
 rank of the augmented matrix of the 
 system and basis, pointing vector, etc.
 
-# Enter the augmented matrix of your system.
+Solving System
+<img width="345" alt="Screenshot 2022-06-20 at 4 32 43 PM" src="https://user-images.githubusercontent.com/89004991/174588368-e29b5995-354d-4d9d-b249-82411b049bb3.png">
+
+Augmented Matrix
+<img width="256" alt="Screenshot 2022-06-20 at 4 32 52 PM" src="https://user-images.githubusercontent.com/89004991/174588258-4bf015d2-1f03-45c0-9044-568cb3fad92e.png">
+
+Entering the input
 <img width="473" alt="solver" src="https://user-images.githubusercontent.com/89004991/174587662-9fac9d0f-bed2-45f5-835e-29a8797d7b96.png">
-# Get the complete solution
+
+Get the complete solution
 <img width="877" alt="solution" src="https://user-images.githubusercontent.com/89004991/174587676-7be92c7e-c0eb-4b04-917d-0b6c4a5d6771.png">
 
 
