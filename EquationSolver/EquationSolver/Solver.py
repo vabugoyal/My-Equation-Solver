@@ -173,7 +173,7 @@ def knock_down_the_system(given_matrix, typ):
                         break
                     loop_passed = True
                 if bool == True and loop_passed == True and factor>1:
-                    print(f"R{i + 1} ---> R{i + 1}/{Fraction(factor).limit_denominator()}")
+                    print(f"R{i + 1} ---> R{i + 1}/({Fraction(factor).limit_denominator()})")
                     for z in range(n1):
                         given_matrix[i][z] = given_matrix[i][z] / factor
                         given_matrix[i][z] = Fraction(given_matrix[i][z]).limit_denominator()
@@ -333,7 +333,7 @@ def knock_down_the_system(given_matrix, typ):
                 for j in range(n):
                     identity_matrix[i][j] = identity_matrix[i][j]/fac
                     identity_matrix[i][j] = Fraction(identity_matrix[i][j]).limit_denominator()
-                print(f"R{i + 1} ---> R{i + 1}/{Fraction(fac).limit_denominator()}")
+                print(f"R{i + 1} ---> R{i + 1}/({Fraction(fac).limit_denominator()})")
                 print_matrix(given_matrix)
 
     sharpen_the_matrix(given_matrix)

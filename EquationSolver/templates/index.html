@@ -3,19 +3,188 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@800&family=Fascinate&display=swap" rel="stylesheet">
         <title>Equation Solver</title>
+        <style>
+            body {
+                padding: 0;
+                margin: 0
+            }
+            * {
+                box-sizing: border-box;
+            }
+            input, textarea {
+                outline: none;
+            }
+            h1 {
+                margin-top: 0;
+                font-weight: 500;
+            }
+
+            /*row and column structure*/
+            .row {
+                display: flex;
+            }
+            .column {
+                flex: 50%;
+            }
+
+            /*hero section*/
+            #heroMessage {
+                color: white;
+                font-family: 'Dosis', sans-serif;
+                padding: 10% 30%;
+                font-size: 4rem;
+
+            }
+             #hero {
+                background-color: #44acaa;
+                height: 600px;
+             }
+
+             /*managing form*/
+            #matrixInput {
+                padding: 10% 0;
+            }
+
+            /*beautiful form css*/
+            form {
+            position: relative;
+            width: 80%;
+            border-radius: 30px;
+            background: #fff;
+            }
+            .form-left-decoration,
+            .form-right-decoration {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 20px;
+            border-radius: 20px;
+            background: #e89f1f;
+            }
+            .form-left-decoration {
+            bottom: 60px;
+            left: -30px;
+            }
+            .form-right-decoration {
+            top: 60px;
+            right: -30px;
+            }
+            .form-left-decoration:before,
+            .form-left-decoration:after,
+            .form-right-decoration:before,
+            .form-right-decoration:after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 20px;
+            border-radius: 30px;
+            background: #fff;
+            }
+            .form-left-decoration:before {
+            top: -20px;
+            }
+            .form-left-decoration:after {
+            top: 20px;
+            left: 10px;
+            }
+            .form-right-decoration:before {
+            top: -20px;
+            right: 0;
+            }
+            .form-right-decoration:after {
+            top: 20px;
+            right: 10px;
+            }
+            .circle {
+            position: absolute;
+            bottom: 80px;
+            left: -55px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            }
+            .form-inner {
+            padding: 40px;
+            }
+            .form-inner input,
+            .form-inner textarea {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 20px;
+            background: #d0dfe8;
+            }
+            .form-inner textarea {
+            resize: none;
+            }
+            button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 20px;
+            border: none;
+            border-bottom: 4px solid #c98a23;
+            background: #e89f1f;
+            font-size: 16px;
+            font-weight: 400;
+            color: #fff;
+            }
+            button:hover {
+            background: #c98a23;
+            }
+
+
+        </style>
     </head>
     <body>
-        <h1>Equation Solver</h1>
-        <form action="/solve" method="GET" >
-            Enter no. of Rows: <input type="number" name="rows">
-            <br>
-            Enter no. of Cols: <input type="number" name="cols">
-            <textarea name="givenMatrix">
+    <div class="row" id="hero">
+        <div class="column">
+            <h1 id="heroMessage">Solve system of linear equations in no time.</h1>
+        </div>
+        <div class="column">
+            <div id="matrixInput">
 
-            </textarea>
-            <button type="submit">Solve</button>
-        </form>
+                <form action="/solve" method="get" class="decor">
+                    <div class="form-left-decoration"></div>
+                    <div class="form-right-decoration"></div>
+                    <div class="circle"></div>
+                    <div class="form-inner">
+                    <h1>System Data</h1>
+                    <input type="number" placeholder="Number of Rows" name="rows">
+                    <input type="number" placeholder="Number of columns" name="cols">
+                    <textarea placeholder="Augmented matrix..." rows="5" name="givenMatrix"></textarea>
+                    <button type="submit">Solve</button>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="demo">
+        <div class="uniqueSolution row">
+            <div class="column">
+
+            </div>
+            <div class="column">
+
+            </div>
+        </div>
+        <div class="InfiniteSolution row">
+
+        </div>
+        <div class="NoSolution row">
+
+        </div>
+    </div>
+    <div class="footer"></div>
 
 
     </body>

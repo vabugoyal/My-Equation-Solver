@@ -13,4 +13,5 @@ def solve(request):
     # print(request.GET.get('givenMatrix', 'default')) : jis element ka naam text hai request mai uska data utha lega
     print(request)
     solution = process.processMatrix(request)
-    return HttpResponse(solution)
+    params = {"solution" : solution}
+    return render(request, 'answer.html', params)
