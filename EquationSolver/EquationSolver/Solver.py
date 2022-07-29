@@ -103,21 +103,33 @@ def inverse_matrix(given_matrix):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 def knock_down_the_system(given_matrix, typ):
     import sys
     old_stdout = sys.stdout
     sys.stdout = mystdout = StringIO()
 
 
-
-    # examine mystdout.getvalue()
     max_length = 0
-    save_repetition = []
-    n = len(given_matrix)
-    n1 = len(given_matrix[0])
+    n = len(given_matrix) # number of rows
+    n1 = len(given_matrix[0]) # number of columns
 
 #   getting the initial matrix
     initial_matrix = copy.deepcopy(given_matrix)
+
+
 
 #   to get the identity matrix corresponding to the given matrix
     identity_matrix = []
@@ -130,8 +142,11 @@ def knock_down_the_system(given_matrix, typ):
                 temp.append(0)
         identity_matrix.append(temp)
 
-#   a function to print the matrix
+
+
+
     def print_matrix(given_matrix):
+        """This function prints the given matrix in a beautiful manner."""
         nonlocal max_length
         n = len(given_matrix)
         n1 = len(given_matrix[0])
@@ -155,8 +170,10 @@ def knock_down_the_system(given_matrix, typ):
         print("-" * ((max_length + 4) * ((2*n1+1) // 2)) + "*" + "-" * ((max_length + 4) * ((2*n+1) // 2)))
         print()
 
-#   a function to sharpen the matrix
-    def sharpen_the_matrix(given_matrix):
+
+
+    def removeGCD(given_matrix):
+        """This function divides the row of the matrix with its gcd."""
         for i in range(len(given_matrix)):
             if set(given_matrix[i]) != {0,}:
                 x = min(abs(float(i)) for i in (set(given_matrix[i]) - {0,}))
@@ -182,9 +199,9 @@ def knock_down_the_system(given_matrix, typ):
                         identity_matrix[i][z] = Fraction(identity_matrix[i][z]).limit_denominator()
                     print_matrix(given_matrix)
 
-    # removing the minus from last row of the matrix
-    def remove_last_minus(given_matrix):
-        # making the first element of last row positive
+
+    def makePivotOne(given_matrix):
+        """This function make the pivot element of a row to be 1."""
         for i in range(len(given_matrix)):
             m = 0
             factor_sign = 0
@@ -204,74 +221,67 @@ def knock_down_the_system(given_matrix, typ):
 
                 print_matrix(given_matrix)
 
-    print()
 
+
+    def orderRows(given_matrix):
+        """This function order the rows in such a way that a row with more leading zeroes comes first."""
+
+        for i in range(n):
+            for j in range(n - 1, 0, -1):
+                leadingU, leadingD = 0, 0
+                while(leadingU < n1 and given_matrix[j - 1][leadingU] == 0): leadingU += 1
+                while (leadingD < n1 and given_matrix[j][leadingD] == 0): leadingD += 1
+                if (leadingU > leadingD) :
+                    print(f"R{j + 1} <---> R{j - 1 + 1}")
+                    given_matrix[j], given_matrix[j - 1] = given_matrix[j - 1], given_matrix[j]
+                    print_matrix(given_matrix)
+
+
+
+
+    print()
     print("Your given matrix is: ")
     print_matrix(given_matrix)
-    sharpen_the_matrix(given_matrix)
+    removeGCD(given_matrix)
 
-#   making the matrix upper triangular
-    for x in range(n-1):
+
+
+
+
+
+    # making the matrix upper triangular
+    for x in range(min(n, n1)):
+        orderRows(given_matrix)
+        # find the first non-zero element the row : pivot
+        a = 0
+        while(a < n1 and given_matrix[x][a] == '0'): a += 1
+
         for i in range(x, n-1):
+            if given_matrix[x][a] != 0:
+                l = given_matrix[i+1][a]/given_matrix[x][a]
+                l = Fraction(l).limit_denominator()
+                if l!=0:
+                    print(f"R{i+2} ---> R{i+2} - ({l})R{x+1}")
+                    for k in range(n1):
+                        given_matrix[i+1][k] -= l*given_matrix[x][k]
+                        given_matrix[i+1][k] = Fraction(given_matrix[i+1][k]).limit_denominator()
+                    for k in range(n):
+                        identity_matrix[i+1][k] -= l*identity_matrix[x][k]
+                        identity_matrix[i+1][k] = Fraction(identity_matrix[i+1][k]).limit_denominator()
 
-            if x+1<n:
-                p = 0
-                q = 0
-                while p < n1:
-                    if given_matrix[x][p] == 0:
-                        p += 1
-                    else:
-                        break
-                while q < n1:
-                    if given_matrix[x + 1][q] == 0:
-                        q += 1
-                    else:
-                        break
-                if q < p:
-                    bool = True
-                else:
-                    bool = False
+                    print_matrix(given_matrix)
+                    removeGCD(given_matrix)
 
-                if set(given_matrix[x+1])!={0,} and bool:
-                    if save_repetition == []:
-                        print(f"R{x+1} <---> R{x+2}")
-                        save_repetition.append(f"R{x+1} <---> R{x+2}")
-                        given_matrix[x], given_matrix[x + 1] =  given_matrix[x + 1] ,given_matrix[x]
-                        identity_matrix[x], identity_matrix[x + 1] =  identity_matrix[x + 1] ,identity_matrix[x]
-                        print_matrix(given_matrix)
-                        sharpen_the_matrix(given_matrix)
-                    else:
-                        if save_repetition[-1]!= f"R{x+1} <---> R{x+2}" and bool:
-                            save_repetition.append(f"R{x + 1} <---> R{x + 2}")
-                            given_matrix[x], given_matrix[x + 1] = given_matrix[x + 1], given_matrix[x]
-                            identity_matrix[x], identity_matrix[x + 1] = identity_matrix[x + 1], identity_matrix[x]
-                            print_matrix(given_matrix)
-                            sharpen_the_matrix(given_matrix)
 
-            if x<min(n,n1):
-                if given_matrix[x][x]!=0:
-                    l = given_matrix[i+1][x]/given_matrix[x][x]
-                    l = Fraction(l).limit_denominator()
-                    if l!=0:
-                        print(f"R{i+2} ---> R{i+2} - ({l})R{x+1}")
-                        for k in range(n1):
-                            given_matrix[i+1][k] -= l*given_matrix[x][k]
-                            given_matrix[i+1][k] = Fraction(given_matrix[i+1][k]).limit_denominator()
-                        for k in range(n):
-                            identity_matrix[i+1][k] -= l*identity_matrix[x][k]
-                            identity_matrix[i+1][k] = Fraction(identity_matrix[i+1][k]).limit_denominator()
-                    if l!=0:
-                       print_matrix(given_matrix)
-                       sharpen_the_matrix(given_matrix)
 
-    # print("happended at 5")
+
 #   some modification in the matrix
     for i in range(n-1):
         j = 0
         while j < n1-1:
             if given_matrix[i][j] ==0:
                 j += 1
-            elif j>=0:
+            elif j >= 0:
                 if set(given_matrix[i + 1][:j]) == {0, }:
                     l = given_matrix[i + 1][j] / given_matrix[i][j]
                     if l!=0:
@@ -284,11 +294,12 @@ def knock_down_the_system(given_matrix, typ):
                             identity_matrix[i + 1][k] = Fraction(identity_matrix[i + 1][k]).limit_denominator()
                         print_matrix(given_matrix)
                 break
-    # print("happended at 1")
-    sharpen_the_matrix(given_matrix)
-    # print("happended at 2")
-    remove_last_minus(given_matrix)
-    # print("happended at 3")
+
+
+    removeGCD(given_matrix)
+    makePivotOne(given_matrix)
+
+
 #   printing the echelon form of the matrix
     print("The echelon form is:")
     print_matrix(given_matrix)
@@ -311,21 +322,22 @@ def knock_down_the_system(given_matrix, typ):
                             identity_matrix[x-z][i] -= l*identity_matrix[x][i]
                             identity_matrix[x-z][i] = Fraction(identity_matrix[x-z][i]).limit_denominator()
                         print_matrix(given_matrix)
-                        sharpen_the_matrix(given_matrix)
+                        removeGCD(given_matrix)
                 break
+
 
 #   final forced sharpening of the matrix
     for i in range(n):
         m = 0
         bool = False
-        while m<n1:
-           if given_matrix[i][m]!=0:
+        while m < n1:
+           if given_matrix[i][m] != 0:
                fac = given_matrix[i][m]
                bool = True
                break
            else:
                m += 1
-        if  bool:
+        if bool:
             if fac > 1:
                 for j in range(n1):
                     given_matrix[i][j] = given_matrix[i][j]/fac
@@ -336,8 +348,8 @@ def knock_down_the_system(given_matrix, typ):
                 print(f"R{i + 1} ---> R{i + 1}/({Fraction(fac).limit_denominator()})")
                 print_matrix(given_matrix)
 
-    sharpen_the_matrix(given_matrix)
-    remove_last_minus(given_matrix)
+    removeGCD(given_matrix)
+    makePivotOne(given_matrix)
 
 #   printing the reduced form of the matrix
     print("The row-reduced echelon form and the corresponding E matrix to the given matrix: ")
@@ -367,6 +379,11 @@ def knock_down_the_system(given_matrix, typ):
 
     if typ=='a':
         print("The rank of the matrix is:", rank)
+
+
+
+
+
 
     if typ=='n':
 
@@ -474,10 +491,13 @@ def knock_down_the_system(given_matrix, typ):
         n1 = len(given_matrix[0])
         n = len(given_matrix)
 
+
+
+
 #   checking for the no solution condition
     if typ == 'a':
         for i in range(n):
-            if given_matrix[i][-1]!=0 and set(given_matrix[i][:-1])=={0,}:
+            if given_matrix[i][-1]!=0 and set(given_matrix[i][:-1]) == {0,}:
                 print("The following system of equations has no solution.")
                 # # TODO: I have to ask whether to provide the best solution
                 # while True:
@@ -505,9 +525,24 @@ def knock_down_the_system(given_matrix, typ):
 
                 sys.stdout = old_stdout
                 return mystdout.getvalue()
-#   when the rows>=columns(unknowns)
+
+
+    """
+    Rank = number of columns : full column rank
+    - No free variables
+    - Either trivial solution or no solution
+    
+    Rank = number of row : full row rank
+    - Free variables
+    - either trivial solution or infinit solutions
+    
+    """
+
+
+#   when the rows >= columns(unknowns)
     if typ == 'a' and n >= n1-1:
-            if n1-1 == rank: # there is definitely trivial solution
+            if n1-1 == rank:
+                """Case of trivial solution"""
                 try:
                     result_list = []
                     last_unknown = given_matrix[rank - 1][rank] / given_matrix[rank - 1][rank - 1]
@@ -521,8 +556,9 @@ def knock_down_the_system(given_matrix, typ):
 
                     output_lst = result_list[::-1]
                     for i in range(len(output_lst)):
-                        output_lst[i] = round(float(output_lst[i]),3)
+                        output_lst[i] = round(float(output_lst[i]), 3)
                     solution_vector = str(output_lst)[1:-1]
+
                     print(f"The solution space of the given matrix is the vector: ({solution_vector})")
                     # print(f"The dimension of solution space is {n1-1-rank}")
                     print("This is the trivial solution.")
@@ -532,8 +568,9 @@ def knock_down_the_system(given_matrix, typ):
                 except:
                     print("The following system has no solution.")
 
-            else:   # there are definitely infinite solutions
-                free_variables1 = n1-rank-1
+            else:
+                """Case of infinite solution"""
+                free_variables1 = n1 - rank - 1
                 print(f"1. The dimension of the solution is: {free_variables1}")
                 pivot_col = [i for i in pivots.values()][::-1]
                 pivot_row = [i for i in pivots.keys()][::-1]
@@ -565,18 +602,14 @@ def knock_down_the_system(given_matrix, typ):
                     pivot_row_no = pivot_row[pivot_col_ind]
                     for j in range(pivot_col_no + 1, n1 - 1):
                         for x in range(j, n1 - 1):
-
                             if x in idpt:
-                                solution_matrix[x][pivot_col_no] = -given_matrix[pivot_row_no][j]/( given_matrix[pivot_row_no][pivot_col_no])
-
+                                solution_matrix[x][pivot_col_no] = -given_matrix[pivot_row_no][j]/(given_matrix[pivot_row_no][pivot_col_no])
                                 break
                             else:
-
-                                solution_matrix[x][pivot_col_no] += -(solution_matrix[x][j]*given_matrix[pivot_row_no][j])/( given_matrix[pivot_row_no][pivot_col_no])
+                                solution_matrix[x][pivot_col_no] += -(solution_matrix[x][j]*given_matrix[pivot_row_no][j])/(given_matrix[pivot_row_no][pivot_col_no])
 
                 for i in range(len(solution_matrix)):
                     solution_matrix[i].pop(-1)
-
 
 
                 new_solution_matrix = []
@@ -619,6 +652,8 @@ def knock_down_the_system(given_matrix, typ):
                 for i in rhs_ls:
                     print(i, end="")
                 print()
+
+
 
 #   when the rows<columns(unknowns)
     elif typ=='a' and n<n1-1:
